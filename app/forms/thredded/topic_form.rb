@@ -3,7 +3,7 @@ module Thredded
   class TopicForm
     include ActiveModel::Model
 
-    attr_accessor :title, :category_ids, :locked, :sticky, :content, :topic
+    attr_accessor :title, :category_ids, :locked, :sticky, :content, :topic, :start_time, :end_time
     attr_reader :user, :messageboard
 
     validate :validate_children
@@ -16,6 +16,8 @@ module Thredded
       @content = params[:content]
       @user = params[:user] || fail('user is required')
       @messageboard = params[:messageboard]
+      @start_time = params[:start_time]
+      @end_time = params[:end_time]
     end
 
     def self.model_name
@@ -48,6 +50,8 @@ module Thredded
         sticky: sticky,
         user: non_null_user,
         categories: topic_categories,
+        start_time: start_time,
+        end_time: end_time
       )
     end
 
