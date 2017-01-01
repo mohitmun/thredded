@@ -38,6 +38,9 @@ module Thredded
       end
 
       @new_post = messageboard.posts.build(postable: topic)
+      if !params[:ar].blank?
+        render partial: 'thredded/posts/post', collection: @posts, cached: true, layout: false
+      end
     end
 
     def search
